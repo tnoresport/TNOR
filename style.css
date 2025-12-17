@@ -1,0 +1,380 @@
+/* IMPORTATION DES POLICES (Google Fonts) */
+/* 'Chakra Petch' pour le côté tech/agressif, 'Montserrat' pour la lecture */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Montserrat:wght@400;500;700&display=swap');
+
+/* --- CONFIGURATION GÉNÉRALE --- */
+:root {
+    /* Palette Esport Dark */
+    --bg-deep: #0a0a0c;        /* Noir quasi total */
+    --bg-surface: #141418;     /* Gris très sombre pour les éléments */
+    --bg-surface-hover: #1c1c24;
+    
+    /* Couleurs d'accentuation Neon */
+    --neon-red: #ff1f1f;       /* Rouge très vif */
+    --neon-blue: #00f7ff;      /* Bleu cyber (optionnel pour des détails) */
+    
+    /* Texte */
+    --text-primary: #ffffff;
+    --text-secondary: #8a8a9b; /* Gris bleuté tech */
+    
+    /* Polices */
+    --font-heading: 'Chakra Petch', sans-serif; /* Police agressive */
+    --font-body: 'Montserrat', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    /* Fond sombre avec un léger dégradé pour la profondeur */
+    background: linear-gradient(135deg, var(--bg-deep) 0%, #1a1a20 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* --- NAVIGATION (TYPE COCKPIT) --- */
+.navbar {
+    background-color: rgba(10, 10, 12, 0.95); /* Semi-transparent */
+    backdrop-filter: blur(10px); /* Effet de flou moderne */
+    padding: 1rem 2rem;
+    border-bottom: 2px solid rgba(255, 31, 31, 0.3); /* Bordure rouge subtile */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    /* Effet de texte style "Compteur de vitesse" */
+    text-shadow: 0 0 10px rgba(255, 31, 31, 0.6);
+    font-style: italic; /* Légèrement incliné pour la vitesse */
+}
+
+.nav-links a {
+    font-family: var(--font-heading);
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-left: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Effet au survol et lien actif */
+.nav-links a:hover, .nav-links a.active {
+    color: var(--text-primary);
+    text-shadow: 0 0 8px var(--neon-red);
+}
+
+/* La petite barre lumineuse sous le lien actif */
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--neon-red);
+    box-shadow: 0 0 10px var(--neon-red);
+}
+
+
+/* --- LAYOUT PRINCIPAL --- */
+.container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+h1.page-title {
+    font-family: var(--font-heading);
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 3rem;
+    margin-bottom: 60px;
+    letter-spacing: 3px;
+    position: relative;
+    text-shadow: 0 0 15px rgba(255, 31, 31, 0.3);
+}
+
+/* Ligne décorative sous le titre */
+h1.page-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: var(--neon-red);
+    margin: 20px auto 0;
+    transform: skewX(-20deg); /* Incliné pour la vitesse */
+    box-shadow: 0 0 15px var(--neon-red);
+}
+
+/* --- GRILLE DES PILOTES --- */
+.roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+}
+
+/* --- CARTE PILOTE (VERSION PRO) --- */
+.driver-card {
+    background-color: var(--bg-surface);
+    /* Coupe angulaire agressive (clip-path) au lieu de coins ronds */
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+    border: 1px solid #2a2a35;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animation fluide */
+    position: relative;
+}
+
+/* L'effet wow au survol */
+.driver-card:hover {
+    transform: translateY(-10px) scale(1.02); /* Monte et grossit légèrement */
+    background-color: var(--bg-surface-hover);
+    border-color: var(--neon-red);
+    /*Gros halo lumineux rouge */
+    box-shadow: 0 0 30px rgba(255, 31, 31, 0.4); 
+}
+
+/* Petite barre rouge sur le côté de la carte */
+.driver-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--neon-red);
+    opacity: 0.5;
+    transition: 0.3s;
+}
+.driver-card:hover::before {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--neon-red);
+}
+
+
+.driver-img-placeholder {
+    height: 180px;
+    /* Dégradé plus complexe et sombre */
+    background: linear-gradient(45deg, #0f0f13, #2b2b38);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.1);
+    /* Texture de grille par-dessus le dégradé */
+    background-image: 
+        linear-gradient(45deg, #0f0f13, #2b2b38),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.2) 2px, rgba(0,0,0,0.2) 4px);
+    border-bottom: 2px solid rgba(255, 31, 31, 0.2);
+}
+
+.driver-info {
+    padding: 25px;
+    text-align: center;
+}
+
+.driver-info h3 {
+    font-family: var(--font-heading);
+    margin: 0 0 5px 0;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.driver-role {
+    color: var(--neon-red); /* Rôle en rouge neon */
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+/* STATS BAR (Style tableau de bord digital) */
+.driver-stats {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.3);
+    padding: 12px 20px;
+    /* Bordures inclinées */
+    transform: skewX(-10deg); 
+    border: 1px solid #333;
+}
+
+.stat-item {
+    /* On redresse le texte à l'intérieur de la boîte inclinée */
+    transform: skewX(10deg);
+    font-family: var(--font-heading);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.stat-item span {
+    display: block; /* Chiffre sur une nouvelle ligne */
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 2px;
+    text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+
+
+/* --- PIED DE PAGE --- */
+footer {
+    text-align: center;
+    padding: 40px;
+    margin-top: 80px;
+    background: #08080a;
+    border-top: 2px solid #222;
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* =========================================
+   PARTIE POUR LES AUTRES PAGES (RESULTATS, CONTACT)
+   ========================================= */
+
+/* TABLEAUX (Style Dashboard de course) */
+.results-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; /* Espace entre les lignes */
+    margin-top: 30px;
+}
+
+.results-table thead th {
+    font-family: var(--font-heading);
+    text-align: left;
+    padding: 15px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--neon-red);
+}
+
+.results-table tbody tr {
+    background-color: var(--bg-surface);
+    transition: all 0.3s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.results-table tbody tr:hover {
+    transform: scale(1.01);
+    background-color: var(--bg-surface-hover);
+    box-shadow: 0 5px 15px rgba(255, 31, 31, 0.2);
+}
+
+.results-table td {
+    padding: 20px 15px;
+    font-weight: 500;
+    border-top: 1px solid #2a2a35;
+    border-bottom: 1px solid #2a2a35;
+}
+.results-table td:first-child { border-left: 1px solid #2a2a35; border-radius: 8px 0 0 8px;}
+.results-table td:last-child { border-right: 1px solid #2a2a35; border-radius: 0 8px 8px 0;}
+
+
+.badge-win {
+    background: linear-gradient(135deg, #ffd700, #e6ac00); /* Or dégradé */
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    display: inline-block;
+    transform: skewX(-10deg);
+}
+
+/* FORMULAIRES (Style Tech) */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: var(--bg-surface);
+    padding: 40px;
+    border: 1px solid #2a2a35;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+}
+/* Petite ligne décorative rouge en haut du formulaire */
+.contact-form::before {
+    content: '';
+    position: absolute; top:0; left:0; width:100%; height:3px;
+    background: linear-gradient(90deg, var(--neon-red), transparent);
+}
+
+.form-group label {
+    font-family: var(--font-heading);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.form-group input, .form-group textarea, .form-group select {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(0,0,0,0.3);
+    border: 2px solid #2a2a35;
+    color: #fff;
+    font-family: var(--font-body);
+    transition: 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--neon-red);
+    box-shadow: 0 0 15px rgba(255, 31, 31, 0.3);
+    background-color: rgba(0,0,0,0.5);
+}
+
+.btn-submit {
+    background: linear-gradient(135deg, var(--neon-red), #c62828);
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+    transform: skewX(-10deg); /* Bouton incliné */
+    box-shadow: 0 5px 20px rgba(255, 31, 31, 0.4);
+}
+
+.btn-submit:hover {
+    transform: skewX(-10deg) translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 31, 31, 0.7);
+    background: linear-gradient(135deg, #ff4f4f, #e53935);
+}
+
+/* --- CORRECTIF POUR L'ACCUEIL (HERO SECTION) --- */
+/* On applique le style du bouton submit au lien de la page d'accueil */
+a.btn-submit {
+    display: inline-block; /* Nécessaire car c'est un lien <a> */
+    text-align: center;
+    text-decoration: none;
+}
